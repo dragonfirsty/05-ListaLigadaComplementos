@@ -30,7 +30,7 @@ void menu()
 {
 	int op = 0;
 	while (op != 7) {
-		system("cls"); // somente no windows
+		// system("cls"); // somente no windows
 		cout << "Menu Lista Ligada";
 		cout << endl << endl;
 		cout << "1 - Inicializar Lista \n";
@@ -64,13 +64,13 @@ void menu()
 			break;
 		}
 
-		system("pause"); // somente no windows
+		//system("pause"); // somente no windows
 	}
 }
 
 void inicializar()
 {
-	// se a lista j� possuir elementos
+	// se a lista j� possuir elementos
 // libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -120,7 +120,7 @@ void inserirElemento()
 	{
 		return;
 	}
-
+	
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
@@ -131,17 +131,90 @@ void inserirElemento()
 	}
 	else
 	{
-		// procura o final da lista
+		
 		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		//2 1
+	if(aux->valor >= novo->valor){
+		if(novo->valor < aux->valor ){
+		
+		novo->prox = aux;
+		primeiro = novo;
 		}
-		aux->prox = novo;
-	}
+		else{
+			cout << "Não pode numeros duplicados";
+		}
+		
+	}else{
+		NO* anterior = aux;
+		while(aux->prox != NULL){
+			if(aux->valor > novo->valor){
+				
+				novo->prox = aux;
+				anterior->prox = novo;
+				break;
+			}
+			else if(aux->valor == novo->valor){
+				cout << "Não pode numeros duplicados"  << endl;
+				break;
+			}
+			else{
+				anterior = aux;
+				aux = aux->prox;
+			}
+		}
+		if(novo->prox == NULL){
+			aux->prox = novo;
+		}
+	}	
+
+}
 }
 
 void excluirElemento()
 {
+	int numero;
+	cout << "Digite o elemento: ";
+	cin >> numero;
+
+	NO* aux = primeiro;
+
+	if(aux->valor == numero && aux->prox == NULL){
+
+		free(aux);
+	}
+	else if(aux->valor == numero){
+		primeiro = aux->prox;
+		free(aux);
+	}
+	else{
+		NO* anterior = aux;
+		while(aux != NULL){
+			cout << "LOOpando" << endl;
+			if(aux->valor == numero && aux->prox == NULL){
+				cout << anterior->valor << endl;
+				cout << aux->valor << endl;
+				break;
+			}
+			 else if (aux->valor == numero){
+				cout << anterior->valor;
+				cout << aux->valor;
+				anterior->prox = aux->prox;
+				break;
+			}
+			else{
+				anterior = aux;
+				aux = aux->prox;
+			}
+		}
+		if(aux->valor == numero){
+
+			free(aux->prox);
+		}
+		else{
+			cout << "Não existe esse numero na lista";
+		}
+	}
+
 
 }
 
