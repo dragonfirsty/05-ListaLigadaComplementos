@@ -188,16 +188,9 @@ void excluirElemento()
 	}
 	else{
 		NO* anterior = aux;
-		while(aux != NULL){
-			cout << "LOOpando" << endl;
-			if(aux->valor == numero && aux->prox == NULL){
-				cout << anterior->valor << endl;
-				cout << aux->valor << endl;
-				break;
-			}
-			 else if (aux->valor == numero){
-				cout << anterior->valor;
-				cout << aux->valor;
+		while(aux->valor <= numero){
+			
+			if (aux->valor == numero){
 				anterior->prox = aux->prox;
 				break;
 			}
@@ -207,11 +200,10 @@ void excluirElemento()
 			}
 		}
 		if(aux->valor == numero){
-
-			free(aux->prox);
+			free(aux);
 		}
 		else{
-			cout << "Não existe esse numero na lista";
+			cout << "Não existe esse numero na lista" << endl;
 		}
 	}
 
@@ -220,7 +212,24 @@ void excluirElemento()
 
 void buscarElemento()
 {
-
+	int numero;
+	bool achou = false;
+	cout << "Digite um numero:";
+	cin >> numero;
+	NO* aux = primeiro;
+	while (aux->valor <= numero) {
+		if(aux->valor == numero){
+			cout << "Encontrado" << endl;
+			achou = true;
+			break;
+	}
+	else{
+		aux = aux->prox;
+	}
+	}
+	if(achou == false){
+		cout << "Numero nao encontrado" << endl;
+	}
 }
 
 
